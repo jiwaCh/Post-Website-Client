@@ -1,38 +1,595 @@
-.App {
-  text-align: center;
+* {
+  margin: 0;
+  padding: 0;
+  font-family: Sans-serif, Arial, Helvetica;
+  font-size: 1em;
+  background-color: whitesmoke;
+  /* background-color: red; */
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/* NAVBAR START */
+
+.navbar {
+  font-size: 1.05em;
+  width: 100%;
+  height: 6vh;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: white;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.navbar .left {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  background-color: transparent;
+  width: 50%;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.navbar .left * {
+  font-weight: 500;
+  text-decoration: none;
+  color: black;
+  margin-left: 5%;
+  background-color: transparent;
+}
+
+.navbar .left a:hover,
+.navbar .right button:hover {
+  font-size: 1.1em;
+  /* color: blue; */
+  /* text-shadow: 1px 1px 4px #000000; */
+  text-shadow: -1px 0 rgba(0, 0, 0, 0.2), 0 1px rgba(0, 0, 0, 0.2),
+    1px 0 rgba(0, 0, 0, 0.2), 0 -1px rgba(0, 0, 0, 0.2);
+}
+
+.navbar .right {
+  align-items: center;
+  display: flex;
+  flex-direction: row-reverse;
+  background-color: transparent;
+  width: 50%;
+}
+
+.navbar .right * {
+  font-weight: 500;
+  text-decoration: none;
+  color: black;
+  margin-right: 5%;
+  background-color: transparent;
+  border: transparent;
+}
+
+.navbar button:hover {
+  cursor: pointer;
+}
+
+/* NAVBAR END */
+
+/* LOGIN START */
+
+.loginContainer {
+  margin: auto;
+  margin-top: 20vh;
+  width: min-content;
+  height: min-content;
+  background-color: white;
+  padding: 5%;
+  border-radius: 5px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.loginContainer .g1,
+.g2,
+.g3 {
+  background-color: transparent;
+  width: 100%;
+  margin-top: 5%;
+}
+
+.loginContainer .g1 div,
+.g2 div {
+  background-color: transparent;
+}
+
+.loginContainer .input {
+  margin-top: 1%;
+  padding-top: 4%;
+}
+
+.loginContainer .g3 button {
+  margin-top: 4%;
+  background-color: rgb(8, 148, 244);
+  width: 100%;
+  color: white;
+  padding: 1%;
+  border-radius: 5px;
+  border: 0px;
+
+  margin-bottom: 5%;
+}
+
+.loginContainer .g3 button:hover {
+  cursor: pointer;
+}
+
+/* LOGIN END */
+
+/* SIGN-UP START */
+
+.Signup {
+  margin: auto;
+  margin-top: 20vh;
+  width: min-content;
+  height: min-content;
+  background-color: white;
+  padding: 5%;
+  border-radius: 5px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.Signup .formContainer {
+  background-color: transparent;
+  width: 100%;
+  height: 100%;
+}
+
+.Signup .formContainer .formUsername,
+.formPassword {
+  background-color: transparent;
+  margin-top: 10%;
+}
+
+.Signup .formContainer .inputField {
+  background-color: transparent;
+  margin-top: 5%;
+  padding: 2%;
+}
+
+.Signup .formContainer .ErrorMessage {
+  background-color: transparent;
+  color: red;
+}
+
+.Signup .formContainer .showButton {
+  background-color: transparent;
+  border: 0px;
+  display: flex;
+  margin-left: auto;
+  margin-right: -3%;
+  margin-top: 1%;
+  font-size: 0.9em;
+  /* border: 1px solid rgb(255, 0, 0); */
+}
+
+.Signup .formContainer .showButton:hover {
+  cursor: pointer;
+}
+
+.Signup .submitButton {
+  margin-top: 4%;
+  background-color: rgb(0, 100, 0);
+  width: 100%;
+  color: white;
+  padding: 1%;
+  border-radius: 5px;
+  border: 0px;
+  margin-left: auto;
+  margin-bottom: 5%;
+}
+
+.Signup .submitButton:hover {
+  cursor: pointer;
+}
+/* SIGN-UP END */
+
+/* HOME START */
+.Homepage {
+  margin-top: 5vh;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  flex-shrink: 1;
+}
+
+.Homepage .post {
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  margin: auto;
+  width: 96%;
+  max-width: 500px;
+  height: 100%;
+  margin-bottom: 5vh;
+  flex-shrink: 1;
+  background-color: rgb(255, 255, 255);
+}
+
+.Homepage .post:hover {
+  cursor: pointer;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.8), 0 6px 20px 0 rgba(0, 0, 0, 0.6);
+}
+
+.Homepage .post .topContainer {
+  padding-top: 1%;
+  padding-left: 1%;
+  padding-bottom: 1%;
+  background-color: transparent;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.Homepage .post .topContainer:hover {
+  cursor: default;
+}
+
+.Homepage .post .topContainer .left {
+  background-color: transparent;
+  width: 50%;
+}
+
+.Homepage .post .topContainer .left .iconUser {
+  background-color: transparent;
+  width: 1.5em;
+  height: 1.5em;
+}
+
+.Homepage .post .topContainer .left .UserName {
+  background-color: transparent;
+  font-size: 1.5em;
+  padding-left: 1%;
+}
+
+.Homepage .post .topContainer .right {
+  background-color: transparent;
+  margin-right: 1%;
+}
+
+.Homepage .post .topContainer .right .deletePostButton {
+  background-color: transparent;
+  color: rgb(200, 0, 0);
+  width: min-content;
+  width: 1.3em;
+  height: 1.3em;
+}
+
+.Homepage .post .topContainer .right .deletePostButton:hover {
+  cursor: pointer;
+  width: 1.5em;
+  height: 1.5em;
+  color: red;
+}
+
+.Homepage .post .title {
+  border-top: 1px solid rgba(0, 0, 0, 0.2);
+  padding-top: 1%;
+  padding-bottom: 1%;
+  width: 100%;
+  background-color: transparent;
+  font-size: 1.2em;
+}
+
+.Homepage .post .body {
+  clear: right;
+  width: 100%;
+  background-color: transparent;
+  padding-top: 1%;
+  padding-bottom: 1%;
+  border-top: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.Homepage .post div > p {
+  background-color: transparent;
+  margin-left: 1%;
+  margin-right: 1%;
+  color: rgb(0, 0, 0);
+  font-size: 1em;
+  word-wrap: break-word;
+}
+
+.Homepage .post .homeImage {
+  margin-top: 1%;
+}
+
+.Homepage .post .footer {
+  border-top: 1px solid rgba(0, 0, 0, 0.2);
+  cursor: default;
+  display: flex;
+  flex-direction: row;
+  padding-top: 1%;
+  padding-bottom: 1%;
+  justify-content: space-between;
+  background-color: transparent;
+}
+
+.Homepage .post .footer * {
+  background-color: white;
+}
+
+.Homepage .post .footerTextDiv {
+  margin-left: 1%;
+  font-size: 1em;
+}
+
+.Homepage .post .footerTextDiv div:nth-child(2):hover {
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.Homepage .post .LikeButton {
+  margin-right: 1%;
+}
+
+.Homepage .post .LikeButton * {
+  width: 1.8em;
+  height: 1.8em;
+}
+
+.Homepage .post .LikeButton :hover {
+  cursor: pointer;
+  width: 2em;
+  height: 2em;
+}
+
+/* HOME END */
+
+/* EACH POST START */
+
+.postPage {
+  margin-top: 2vh;
+
+  /* display: flex;
+  flex-direction: column; */
+  /* justify-content: center;
+  align-content: center; */
+}
+
+.postPage .post {
+  padding-left: 4px;
+  padding-right: 4px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  margin: auto;
+  width: 94%;
+  max-width: 400px;
+  margin-bottom: 2vh;
+  flex-shrink: 1;
+  background-color: white;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.8), 0 3px 10px 0 rgba(0, 0, 0, 0.6);
+}
+
+.postPage .post .topContainer {
+  padding-top: 1%;
+  padding-left: 1%;
+  padding-bottom: 1%;
+  background-color: transparent;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.postPage .post .topContainer .left {
+  background-color: transparent;
+  width: 50%;
+}
+
+.postPage .post .topContainer .left .iconUser {
+  background-color: transparent;
+  width: 1.2em;
+  height: 1.2em;
+}
+
+.postPage .post .topContainer .left .UserName {
+  background-color: transparent;
+  font-size: 1.2em;
+  padding-left: 1%;
+}
+
+.postPage .post .title {
+  border-top: 1px solid rgba(0, 0, 0, 0.2);
+  padding-top: 1%;
+  padding-bottom: 1%;
+  width: 100%;
+  background-color: transparent;
+  font-size: 1.2em;
+}
+
+.postPage .post .body {
+  clear: right;
+  width: 100%;
+  background-color: transparent;
+  padding-top: 1%;
+  padding-bottom: 1%;
+  border-top: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.postPage .post div > p {
+  background-color: transparent;
+  margin-left: 1%;
+  margin-right: 1%;
+  color: rgb(0, 0, 0);
+  font-size: 1em;
+  word-wrap: break-word;
+}
+
+.postPage .post .homeImage {
+  margin-top: 1%;
+}
+
+.postPage .commentsContainer {
+  margin: auto;
+  width: 96%;
+  max-width: 400px;
+}
+
+.postPage .commentsContainer .addCommentContainer {
+  max-width: 400px;
+  margin-bottom: 2vh;
+  flex-shrink: 1;
+  background-color: white;
+}
+
+.postPage .commentsContainer .addCommentContainer .inputComment {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border: 0px;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  width: 100%;
+}
+
+.postPage .commentsContainer .addCommentContainer .inputComment {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border: 0px;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  width: 100%;
+}
+
+.postPage .commentsContainer .addCommentContainer .commentButton {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  /* color: red; */
+  width: 100%;
+}
+
+.commentButton:enabled,
+.commentButton[enabled] {
+  background-color: rgb(8, 148, 244);
   color: white;
+  font-size: 1.2em;
+  cursor: pointer;
 }
 
-.App-link {
-  color: #61dafb;
+/* list of comments */
+.postPage .commentsContainer .listOfComments .comment {
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  padding-left: 4px;
+  padding-right: 4px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  margin: auto;
+  max-width: 400px;
+  margin-bottom: 2vh;
+  flex-shrink: 1;
+  background-color: white;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.8), 0 3px 10px 0 rgba(0, 0, 0, 0.6);
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.listOfComments .commentByContainer {
+  background-color: white;
+  padding: 1%;
+  padding-top: 2%;
+  font-size: 1em;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
+
+.listOfComments .commentByContainer * {
+  /* color: rgb(0, 0, 0); */
+  font-weight: bold;
+  background-color: white;
+}
+
+.listOfComments .deleteCommentButton {
+  background-color: white;
+  padding-top: 1%;
+  padding-left: 1%;
+
+  color: rgb(200, 0, 0);
+  width: 1.2em;
+  height: 1.2em;
+}
+
+.listOfComments .deleteCommentButton:hover {
+  cursor: pointer;
+  color: red;
+}
+
+.listOfComments .commentBody {
+  border-top: 1px solid rgba(0, 0, 0, 0.2);
+  background-color: white;
+  padding: 1%;
+  padding-bottom: 2%;
+}
+
+.commentsContainer .maxCharacterPrompt {
+  height: 1em;
+  margin-bottom: 1%;
+  color: red;
+  font-weight: bold;
+}
+
+/* EACH POST END */
+
+/* Create POST START */
+/* SIGN-UP START */
+
+.createPostPage {
+  margin: auto;
+  margin-top: 10vh;
+  width: min-content;
+  height: min-content;
+  background-color: white;
+  padding: 5%;
+  border-radius: 5px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.createPostPage .formContainer {
+  background-color: transparent;
+  width: 100%;
+  height: 100%;
+}
+
+.createPostPage .formContainer .formUsername,
+.formPassword {
+  background-color: transparent;
+  margin-top: 10%;
+}
+
+.createPostPage .formContainer .inputField {
+  background-color: transparent;
+  margin-bottom: 5%;
+  margin-top: 1%;
+  padding: 2%;
+}
+
+.createPostPage .formContainer .inputField:nth-child(2) {
+  margin-bottom: 3%;
+}
+
+.createPostPage .formContainer .ErrorMessage {
+  background-color: transparent;
+  color: red;
+}
+
+.createPostPage .createPostButton {
+  margin-top: 5%;
+  background-color: rgb(8, 148, 244);
+  width: 100%;
+  color: white;
+  padding: 1%;
+  border-radius: 5px;
+  border: 0px;
+  margin-left: auto;
+  margin-bottom: 5%;
+}
+
+.createPostPage .createPostButton:hover {
+  cursor: pointer;
+}
+
+.createPostPage .formContainer .uploadImageLabel {
+  background-color: white;
+  font-size: 0.9em;
+}
+
+.createPostPage .formContainer .uploadImageLabel {
+  background-color: white;
+}
+
+.createPostPage .formContainer .chooseFileButton:hover {
+  cursor: pointer;
+}
+
+/* SIGN-UP END */
+/* Create POST END */
