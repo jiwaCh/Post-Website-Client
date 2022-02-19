@@ -11,9 +11,18 @@ const Login = (props) => {
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
 
+  const isProduction = true;
+  let hostUrl = null;
+
   const onSubmit = () => {
+    if (isProduction) {
+      hostUrl = "https://post-website-server.herokuapp.com/";
+    } else {
+      hostUrl = "http://localhost:3001/";
+    }
+
     const data = { userName: userName, password: password };
-    axios.post("http://localhost:3001/auth/login", data).then((response) => {
+    axios.post(hostUrl + "auth/login", data).then((response) => {
       if (response.data.error) {
         alert(response.data.error);
       } else {

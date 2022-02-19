@@ -15,6 +15,8 @@ const Home = (props) => {
   const [listOfLikedPosts, setListOfLikedPosts] = useState([]);
   const refImg = useRef([]);
   let navigate = useNavigate();
+  const isProduction = true;
+  let hostUrl = null;
 
   // // // getting data from parent -- this is called whenever setIsLoggedIn is changed in APP.JS!!!....
   if (props.passingDataParentToChild_isLogged !== isLoggedIn) {
@@ -23,6 +25,12 @@ const Home = (props) => {
   }
 
   useEffect(() => {
+    if (isProduction) {
+      hostUrl = "https://post-website-server.herokuapp.com/";
+    } else {
+      hostUrl = "http://localhost:3001/";
+    }
+
     // get all posts and likes count
 
     if (!isLoggedIn) {
@@ -31,7 +39,7 @@ const Home = (props) => {
     }
 
     axios
-      .get("http://localhost:3001/Posts", {
+      .get(hostUrl + "Posts", {
         headers: {
           accessToken: localStorage.getItem("accessToken"),
         },
@@ -63,7 +71,7 @@ const Home = (props) => {
     // console.log("onClickLikeButton");
     axios
       .post(
-        "http://localhost:3001/likes",
+        hostUrl + "likes",
         { PostId: PostId },
         {
           headers: {
@@ -104,7 +112,7 @@ const Home = (props) => {
     if (!window.confirm("Are you sure you want to delete post?")) return;
 
     axios
-      .delete("http://localhost:3001/Posts", {
+      .delete(hostUrl + "Posts", {
         headers: {
           PostId: PostId,
           accessToken: localStorage.getItem("accessToken"),

@@ -18,6 +18,8 @@ const Post = (props) => {
   const [comments, setComment] = useState([]);
   const [newComment, setNewComment] = useState("");
   const [currentUser, setCurrentUser] = useState();
+  const isProduction = true;
+  let hostUrl = null;
 
   if (props.passingDataParentToChild_isLogged3 !== isLoggedIn) {
     console.log("Change in log state from each post " + isLoggedIn);
@@ -29,22 +31,28 @@ const Post = (props) => {
       return navigate("/login");
     }
 
+    if (isProduction) {
+      hostUrl = "https://post-website-server.herokuapp.com/";
+    } else {
+      hostUrl = "http://localhost:3001/";
+    }
+
     commentButtonRef.current.disabled = true;
     // get post
-    axios.get(`http://localhost:3001/Posts/byId/${id}`).then((response) => {
+    axios.get(hostUrl + `Posts/byId/${id}`).then((response) => {
       // console.log("the response is " + JSON.stringify(response.data));
       setPostObject(response.data);
     });
 
     // get comment
-    axios.get(`http://localhost:3001/comments/${id}`).then((response) => {
+    axios.get(hostUrl + `comments/${id}`).then((response) => {
       // console.log("the response is " + JSON.stringify(response.data));
       setComment(response.data);
     });
 
     // get user
     axios
-      .get(`http://localhost:3001/auth/valid`, {
+      .get(hostUrl + `auth/valid`, {
         headers: {
           accessToken: localStorage.getItem("accessToken"),
         },
@@ -58,7 +66,7 @@ const Post = (props) => {
     console.log("bout to add with id " + id);
     axios
       .post(
-        "http://localhost:3001/comments",
+        hostUrl + "comments",
         {
           commentBody: newComment,
           PostId: id,
@@ -77,7 +85,7 @@ const Post = (props) => {
           // here we render the new comment to the list
 
           // get new sets of comment
-          axios.get(`http://localhost:3001/comments/${id}`).then((result) => {
+          axios.get(hostUrl + `comments/${id}`).then((result) => {
             setComment(result.data);
           });
 
@@ -91,7 +99,7 @@ const Post = (props) => {
   const onDelete = (commentId) => {
     console.log("called on delete");
     axios
-      .delete(`http://localhost:3001/comments/${commentId}`, {
+      .delete(hostUrl + `comments/${commentId}`, {
         headers: {
           accessToken: localStorage.getItem("accessToken"),
         },
