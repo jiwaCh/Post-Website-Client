@@ -63,7 +63,7 @@ const Home = (props) => {
     // console.log("onClickLikeButton");
     axios
       .post(
-        "https://post-website-server.herokuapp.com/likes",
+        "http://localhost:3001/likes",
         { PostId: PostId },
         {
           headers: {
@@ -104,7 +104,7 @@ const Home = (props) => {
     if (!window.confirm("Are you sure you want to delete post?")) return;
 
     axios
-      .delete("https://post-website-server.herokuapp.com/Posts", {
+      .delete("http://localhost:3001/Posts", {
         headers: {
           PostId: PostId,
           accessToken: localStorage.getItem("accessToken"),

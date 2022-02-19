@@ -283,7 +283,7 @@
   margin-right: 1%;
   color: rgb(0, 0, 0);
   font-size: 1em;
-  word-wrap: break-word;
+  white-space: pre-line;
 }
 
 .Homepage .post .homeImage {
