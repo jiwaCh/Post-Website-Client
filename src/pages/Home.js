@@ -10,6 +10,7 @@ import { FaUser, FaTrashAlt, FaTrash } from "react-icons/fa";
 const Home = (props) => {
   const [isLoggedIn, setIsLoggedIn] = useState(true);
   // const [state, setState] = useState(true);
+  const [loadPost, setLoadPost] = useState(false);
   const [currentUserId, setCurrentUserId] = useState();
   const [listOfPosts, setListOfPosts] = useState([]);
   const [listOfLikedPosts, setListOfLikedPosts] = useState([]);
@@ -31,6 +32,7 @@ const Home = (props) => {
   }
 
   useEffect(() => {
+    console.log("Home page useeffect called");
     // get all posts and likes count
 
     if (!isLoggedIn) {
@@ -48,26 +50,30 @@ const Home = (props) => {
       }
     }
 
-    axios
-      .get("https://post-website-server.herokuapp.com/Posts", {
-        headers: {
-          accessToken: localStorage.getItem("accessToken"),
-        },
-      })
-      .then((response) => {
-        console.log(response);
-        // if (response.data.state.includes("notLoggedIn")) {
-        //   setIsLoggedIn(false);
-        //   navigate("/login");
-        // } else {
-        setIsLoggedIn(true);
-        setCurrentUserId(response.data.userId);
-        setListOfLikedPosts(response.data.listOfLikedPosts);
-        setListOfPosts(response.data.listOfPosts);
-        // }
+    try {
+      axios
+        .get("https://post-website-server.herokuapp.com/Posts", {
+          headers: {
+            accessToken: localStorage.getItem("accessToken"),
+          },
+        })
+        .then((response) => {
+          console.log(response);
+          // if (response.data.state.includes("notLoggedIn")) {
+          //   setIsLoggedIn(false);
+          //   navigate("/login");
+          // } else {
+          setIsLoggedIn(true);
+          setCurrentUserId(response.data.userId);
+          setListOfLikedPosts(response.data.listOfLikedPosts);
+          setListOfPosts(response.data.listOfPosts);
+          // }
 
-        // if user is not logged in then send to login page...
-      });
+          // if user is not logged in then send to login page...
+        });
+    } catch (e) {
+      console.log("Error getting post");
+    }
   }, [isLoggedIn]);
 
   const onClickLikeButton = (PostId, e) => {
