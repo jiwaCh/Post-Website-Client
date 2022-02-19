@@ -227,7 +227,7 @@ const Post = (props) => {
                   </div>
                 </div>
 
-                <div className="commentBody">{comment.commentBody}</div>
+                <p className="commentBody">{comment.commentBody}</p>
               </div>
             );
           })}

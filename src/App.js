@@ -16,7 +16,7 @@ import axios from "axios";
 //JSON.stringify() method converts a JavaScript object or value to a JSON string
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState();
   const [currentUserName, setCurrentUserName] = useState("");
 
   useEffect(() => {
