@@ -16,10 +16,11 @@ import axios from "axios";
 //JSON.stringify() method converts a JavaScript object or value to a JSON string
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState();
+  const [isLoggedIn, setIsLoggedIn] = useState(null);
   const [currentUserName, setCurrentUserName] = useState("");
 
   useEffect(() => {
+    console.log("login state value: " + isLoggedIn);
     axios
       .get(`https://post-website-server.herokuapp.com/auth/valid`, {
         headers: {
@@ -40,7 +41,7 @@ function App() {
           );
         }
       });
-  }, []);
+  }, [isLoggedIn]);
 
   const logout = () => {
     localStorage.removeItem("accessToken");

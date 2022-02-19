@@ -10,7 +10,7 @@ const Post = (props) => {
   // const refMaxCharacterPrompt = useRef();
   const [isMaxCharacter, setIsMaxCharacter] = useState(false);
   const refImg = useRef();
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
 
   const navigate = useNavigate();
   let { id } = useParams();
@@ -19,14 +19,32 @@ const Post = (props) => {
   const [newComment, setNewComment] = useState("");
   const [currentUser, setCurrentUser] = useState();
 
-  if (props.passingDataParentToChild_isLogged3 !== isLoggedIn) {
-    console.log("Change in log state from each post " + isLoggedIn);
+  if (
+    props.passingDataParentToChild_isLogged3 !== isLoggedIn &&
+    props.passingDataParentToChild_isLogged3 !== null
+  ) {
+    console.log(
+      "Change in log state from each post " +
+        isLoggedIn +
+        "to " +
+        props.passingDataParentToChild_isLogged3
+    );
     setIsLoggedIn(props.passingDataParentToChild_isLogged3);
   }
 
   useEffect(() => {
     if (!isLoggedIn) {
       return navigate("/login");
+    } else {
+      const tempToken = localStorage.getItem("accessToken");
+      try {
+        if (tempToken === null && tempToken.length < 1) {
+          navigate("/login");
+        }
+      } catch (e) {
+        console.log("empty token");
+        navigate("/login");
+      }
     }
 
     commentButtonRef.current.disabled = true;

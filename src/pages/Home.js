@@ -17,8 +17,16 @@ const Home = (props) => {
   let navigate = useNavigate();
 
   // // // getting data from parent -- this is called whenever setIsLoggedIn is changed in APP.JS!!!....
-  if (props.passingDataParentToChild_isLogged !== isLoggedIn) {
-    console.log("Change in log state from home post " + isLoggedIn);
+  if (
+    props.passingDataParentToChild_isLogged !== isLoggedIn &&
+    props.passingDataParentToChild_isLogged !== null
+  ) {
+    console.log(
+      "Change in log state from home post from " +
+        isLoggedIn +
+        "to " +
+        props.passingDataParentToChild_isLogged
+    );
     setIsLoggedIn(props.passingDataParentToChild_isLogged);
   }
 
@@ -28,6 +36,16 @@ const Home = (props) => {
     if (!isLoggedIn) {
       console.log("navigate to login page from home page");
       return navigate("/login");
+    } else {
+      const tempToken = localStorage.getItem("accessToken");
+      try {
+        if (tempToken === null && tempToken.length < 1) {
+          navigate("/login");
+        }
+      } catch (e) {
+        console.log("empty token");
+        navigate("/login");
+      }
     }
 
     axios
@@ -120,6 +138,7 @@ const Home = (props) => {
   };
 
   const resizeImage_Keep_AspectRatio = (index) => {
+    console.log("on resize image load called");
     const maxWidth = 100;
     const maxHeight = 100;
     const currentWidth = refImg.current[index].width;
@@ -129,6 +148,7 @@ const Home = (props) => {
 
     refImg.current[index].style.width = currentWidth * ratio + "%";
     refImg.current[index].style.height = currentHeight * ratio + "%";
+    refImg.current[index].style.visibility = "visible";
   };
   return (
     <div className="Homepage">
@@ -162,6 +182,7 @@ const Home = (props) => {
             </div>
             {value.imageURL !== null ? (
               <img
+                style={{ visibility: "hidden" }}
                 className="homeImage"
                 onClick={() => navigate(`/post/${value.id}`)}
                 // style={{ display: "none" }} // meant to prevent flash -- does not work as well.. need to understand why it keeps flashing. also notice css change / update on refresh
@@ -170,6 +191,7 @@ const Home = (props) => {
                 }}
                 src={value.imageURL}
                 onLoad={() => {
+                  console.log("on image load called");
                   // console.log("image.onload");
                   // console.log("value.imageURL" + value.imageURL);
                   // console.log(refImg.current[0]);

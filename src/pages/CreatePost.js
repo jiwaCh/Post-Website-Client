@@ -20,13 +20,21 @@ const CreatePost = (props) => {
   const refImg = useRef();
   const refCreatePostButton = useRef();
   const [imageFile, setImageFile] = useState(null);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
   const [buttonText, setButtonText] = useState("Create Post");
 
   let navigate = useNavigate();
 
-  if (props.passingDataParentToChild_isLogged2 !== isLoggedIn) {
-    console.log("Change in log state from create post " + isLoggedIn);
+  if (
+    props.passingDataParentToChild_isLogged2 !== isLoggedIn &&
+    props.passingDataParentToChild_isLogged2 !== null
+  ) {
+    console.log(
+      "Change in log state from create post " +
+        isLoggedIn +
+        "to " +
+        props.passingDataParentToChild_isLogged2
+    );
     setIsLoggedIn(props.passingDataParentToChild_isLogged2);
   }
 
@@ -34,6 +42,16 @@ const CreatePost = (props) => {
     if (!isLoggedIn) {
       console.log("navigate to login page from create post");
       navigate("/login");
+    } else {
+      const tempToken = localStorage.getItem("accessToken");
+      try {
+        if (tempToken === null && tempToken.length < 1) {
+          navigate("/login");
+        }
+      } catch (e) {
+        console.log("empty token");
+        navigate("/login");
+      }
     }
   }, [isLoggedIn]);
 
