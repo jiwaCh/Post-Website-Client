@@ -11,34 +11,33 @@ function SignUp() {
   const [buttonText, setButtonText] = useState("Show");
   let passwordLength = 0;
   let navigate = useNavigate();
-  const isProduction = true;
-  let hostUrl = null;
 
   const onSubmit = (data) => {
-    if (isProduction) {
-      hostUrl = "https://post-website-server.herokuapp.com/";
-    } else {
-      hostUrl = "http://localhost:3001/";
-    }
-
     console.log(data);
     // check if the username exists.
-    axios.post(hostUrl + "auth/validUsername", data).then((response) => {
-      if (response.data === "Success") {
-        alert("Account created");
+    axios
+      .post(
+        "https://post-website-server.herokuapp.com/auth/validUsername",
+        data
+      )
+      .then((response) => {
+        if (response.data === "Success") {
+          alert("Account created");
 
-        axios.post(hostUrl + "auth", data).then((response) => {
-          // setListOfPosts(response.data);
-          console.log(
-            "You sumbitted the data : " + JSON.stringify(response.data)
-          );
-          navigate("/");
-        });
-      } else {
-        alert("Username is taken");
-      }
-      // console.log(response);
-    });
+          axios
+            .post("https://post-website-server.herokuapp.com/auth", data)
+            .then((response) => {
+              // setListOfPosts(response.data);
+              console.log(
+                "You sumbitted the data : " + JSON.stringify(response.data)
+              );
+              navigate("/");
+            });
+        } else {
+          alert("Username is taken");
+        }
+        // console.log(response);
+      });
   };
 
   const initialValues = {

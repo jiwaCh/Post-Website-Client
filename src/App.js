@@ -18,18 +18,10 @@ import axios from "axios";
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(true);
   const [currentUserName, setCurrentUserName] = useState("");
-  const isProduction = true;
-  let hostUrl = null;
 
   useEffect(() => {
-    if (isProduction) {
-      hostUrl = "https://post-website-server.herokuapp.com/";
-    } else {
-      hostUrl = "http://localhost:3001/";
-    }
-
     axios
-      .get(hostUrl + `auth/valid`, {
+      .get(`https://post-website-server.herokuapp.com/auth/valid`, {
         headers: {
           accessToken: localStorage.getItem("accessToken"),
         },

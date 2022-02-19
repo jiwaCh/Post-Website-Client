@@ -18,8 +18,6 @@ const Post = (props) => {
   const [comments, setComment] = useState([]);
   const [newComment, setNewComment] = useState("");
   const [currentUser, setCurrentUser] = useState();
-  const isProduction = true;
-  let hostUrl = null;
 
   if (props.passingDataParentToChild_isLogged3 !== isLoggedIn) {
     console.log("Change in log state from each post " + isLoggedIn);
@@ -31,28 +29,26 @@ const Post = (props) => {
       return navigate("/login");
     }
 
-    if (isProduction) {
-      hostUrl = "https://post-website-server.herokuapp.com/";
-    } else {
-      hostUrl = "http://localhost:3001/";
-    }
-
     commentButtonRef.current.disabled = true;
     // get post
-    axios.get(hostUrl + `Posts/byId/${id}`).then((response) => {
-      // console.log("the response is " + JSON.stringify(response.data));
-      setPostObject(response.data);
-    });
+    axios
+      .get(`https://post-website-server.herokuapp.com/Posts/byId/${id}`)
+      .then((response) => {
+        // console.log("the response is " + JSON.stringify(response.data));
+        setPostObject(response.data);
+      });
 
     // get comment
-    axios.get(hostUrl + `comments/${id}`).then((response) => {
-      // console.log("the response is " + JSON.stringify(response.data));
-      setComment(response.data);
-    });
+    axios
+      .get(`https://post-website-server.herokuapp.com/comments/${id}`)
+      .then((response) => {
+        // console.log("the response is " + JSON.stringify(response.data));
+        setComment(response.data);
+      });
 
     // get user
     axios
-      .get(hostUrl + `auth/valid`, {
+      .get(`https://post-website-server.herokuapp.com/auth/valid`, {
         headers: {
           accessToken: localStorage.getItem("accessToken"),
         },
@@ -66,7 +62,7 @@ const Post = (props) => {
     console.log("bout to add with id " + id);
     axios
       .post(
-        hostUrl + "comments",
+        "https://post-website-server.herokuapp.com/comments",
         {
           commentBody: newComment,
           PostId: id,
@@ -85,9 +81,11 @@ const Post = (props) => {
           // here we render the new comment to the list
 
           // get new sets of comment
-          axios.get(hostUrl + `comments/${id}`).then((result) => {
-            setComment(result.data);
-          });
+          axios
+            .get(`https://post-website-server.herokuapp.com/comments/${id}`)
+            .then((result) => {
+              setComment(result.data);
+            });
 
           // remove text from the input field
           commentButtonRef.current.disabled = true;
@@ -99,11 +97,14 @@ const Post = (props) => {
   const onDelete = (commentId) => {
     console.log("called on delete");
     axios
-      .delete(hostUrl + `comments/${commentId}`, {
-        headers: {
-          accessToken: localStorage.getItem("accessToken"),
-        },
-      })
+      .delete(
+        `https://post-website-server.herokuapp.com/comments/${commentId}`,
+        {
+          headers: {
+            accessToken: localStorage.getItem("accessToken"),
+          },
+        }
+      )
       .then((response) => {
         console.log(response);
         setComment(

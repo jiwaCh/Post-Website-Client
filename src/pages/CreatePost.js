@@ -16,8 +16,6 @@ const CreatePost = (props) => {
     postText: "",
   };
 
-  const isProduction = true;
-  let hostUrl = null;
   const refInput = useRef();
   const refImg = useRef();
   const refCreatePostButton = useRef();
@@ -33,11 +31,6 @@ const CreatePost = (props) => {
   }
 
   useEffect(() => {
-    if (isProduction) {
-      hostUrl = "https://post-website-server.herokuapp.com/";
-    } else {
-      hostUrl = "http://localhost:3001/";
-    }
     if (!isLoggedIn) {
       console.log("navigate to login page from create post");
       navigate("/login");
@@ -46,7 +39,7 @@ const CreatePost = (props) => {
 
   const sendPostDataToDB = (data) => {
     axios
-      .post(hostUrl + "Posts", data, {
+      .post("https://post-website-server.herokuapp.com/Posts", data, {
         headers: {
           accessToken: localStorage.getItem("accessToken"),
         },
@@ -202,7 +195,7 @@ const CreatePost = (props) => {
                   src={URL.createObjectURL(imageFile)}
                   alt="Girl in a jacket"
                 />
-                <IoIosCloseCircle
+                <IoIosCloseCircleOutline
                   style={{
                     color: "red",
                     backgroundColor: "white",
@@ -214,7 +207,7 @@ const CreatePost = (props) => {
                     refInput.current.type = null;
                     refInput.current.type = "file";
                   }}
-                ></IoIosCloseCircle>
+                ></IoIosCloseCircleOutline>
               </div>
             ) : null}
           </div>
