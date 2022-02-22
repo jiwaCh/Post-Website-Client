@@ -8,7 +8,13 @@ import { FaUser, FaTrashAlt, FaTrash } from "react-icons/fa";
 //impoprt use histro etcc....
 
 const Home = (props) => {
+
+  let loadingTextCounter = 0;
+  let loadingPercent = 0;
+  const [loadingText, setLoadingText] = useState("Establishing connection...");
   const [isLoggedIn, setIsLoggedIn] = useState(true);
+  let isLoading_LimitFetchData = true; // dont set isLoggedIn usestate in useeffect as it causes refetch of data, use this instead
+  const [isLoading, setIsLoading] = useState(true);
   // const [state, setState] = useState(true);
   const [loadPost, setLoadPost] = useState(false);
   const [currentUserId, setCurrentUserId] = useState();
@@ -31,7 +37,31 @@ const Home = (props) => {
     setIsLoggedIn(props.passingDataParentToChild_isLogged);
   }
 
+  let setTimeoutInstance;
+
+  const loadingTextTimer = (timer)=>{
+    console.log("New timer instance being created");
+    if(isLoading_LimitFetchData){
+    // loading
+    setTimeoutInstance = setTimeout(() => {
+        if(loadingPercent < 90){
+        let randomValue =  Math.floor(Math.random(6,10)* 10);
+        loadingPercent = loadingPercent + randomValue;
+        setLoadingText("Loading " + loadingPercent + "%");
+        loadingTextCounter++;
+        clearTimeout(setTimeoutInstance);
+        loadingTextTimer(1000);
+        }
+      }, timer);
+
+    }
+  } 
+
+
   useEffect(() => {
+
+    loadingTextTimer(2000);
+
     console.log("Home page useeffect called");
     // get all posts and likes count
 
@@ -63,6 +93,9 @@ const Home = (props) => {
           //   setIsLoggedIn(false);
           //   navigate("/login");
           // } else {
+          setIsLoading(false);
+          isLoading_LimitFetchData = false;
+          console.log("set to false : " + isLoading);
           setIsLoggedIn(true);
           setCurrentUserId(response.data.userId);
           setListOfLikedPosts(response.data.listOfLikedPosts);
@@ -158,6 +191,7 @@ const Home = (props) => {
   };
   return (
     <div className="Homepage">
+      {isLoading ? <span className="loading">{loadingText}</span> : null}
       {listOfPosts.map((value, index) => {
         return (
           <div key={index} className="post">
